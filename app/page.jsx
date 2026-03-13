@@ -95,6 +95,16 @@ const FEATURED_ARTICLE = {
 
 const ARTICLES = [
   {
+    tag: "Practical AI",
+    title: "How VRM Operators Are Actually Using AI Right Now",
+    excerpt:
+      "I'm not writing this as theory or a vendor pitch. This is what AI actually looks like inside our operation — what's working, what isn't, and where to start.",
+    readTime: "12 min",
+    status: "Published",
+    subtitle: "A practitioner's guide from inside the operation",
+    link: "/essays/how-vrm-operators-use-ai",
+  },
+  {
     tag: "Hospitality × AI",
     title: "The Mulrooney Play",
     excerpt:
