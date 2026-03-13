@@ -609,7 +609,7 @@ function StatusBadge({ status }) {
       display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px",
       borderRadius: "100px", background: c.bg, fontSize: "12px", fontWeight: 600,
       color: c.text, letterSpacing: "0.03em", textTransform: "uppercase",
-      fontFamily: "'JetBrains Mono', monospace",
+      fontFamily: "'JetBrains Mono', monospace", whiteSpace: "nowrap",
     }}>
       <span style={{
         width: "6px", height: "6px", borderRadius: "50%", background: c.dot,
@@ -1181,7 +1181,7 @@ export default function RenjoyAILanding() {
           {/* Scroll indicator */}
           <div className="fade-in fade-in-d7" style={{
             position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)",
-            display: "flex", flexDirection: "column", alignItems: "center", gap: "8px",
+            display: isMobile ? "none" : "flex", flexDirection: "column", alignItems: "center", gap: "8px",
             opacity: scrollY > 100 ? 0 : 0.4, transition: "opacity 0.3s",
           }}>
             <span style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", fontFamily: "'JetBrains Mono', monospace", color: "#9a958e" }}>Scroll</span>
