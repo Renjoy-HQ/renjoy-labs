@@ -919,19 +919,23 @@ export default function RenjoyAILanding() {
             style={{
               position: "fixed", inset: 0, zIndex: 200,
               background: "rgba(25,12,18,0.82)", backdropFilter: "blur(12px)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "20px",
+              display: "flex", alignItems: isMobile ? "flex-end" : "center", justifyContent: "center",
+              padding: isMobile ? "0" : "20px",
               animation: "modalFadeIn 0.25s ease forwards",
             }}
           >
             <div style={{
               background: "linear-gradient(135deg, #281620, #22121a)",
               border: "1px solid rgba(212,137,122,0.12)",
-              borderRadius: "24px", padding: "48px 44px", maxWidth: "500px", width: "100%",
+              borderRadius: isMobile ? "24px 24px 0 0" : "24px",
+              padding: isMobile ? "32px 24px 40px" : "48px 44px",
+              maxWidth: "500px", width: "100%",
+              maxHeight: isMobile ? "92vh" : "none",
+              overflowY: isMobile ? "auto" : "visible",
               position: "relative",
               boxShadow: "0 24px 80px rgba(25,12,18,0.65), 0 0 60px rgba(212,137,122,0.04)",
               animation: "modalSlideUp 0.3s ease forwards",
-              overflow: "hidden",
+              overflow: isMobile ? "auto" : "hidden",
             }}>
               {/* Inner glow */}
               <div style={{
@@ -983,7 +987,7 @@ export default function RenjoyAILanding() {
                   {/* Form */}
                   <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                     {/* Name + Email row */}
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px" }}>
                       <div>
                         <label style={{ display: "block", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#6b6760", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "6px" }}>Name</label>
                         <input
@@ -1021,7 +1025,7 @@ export default function RenjoyAILanding() {
                     {/* Topic */}
                     <div>
                       <label style={{ display: "block", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#6b6760", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "6px" }}>What's on your mind?</label>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "auto auto auto auto", gap: "8px" }}>
                         {[
                           "AI in my business",
                           "Property management",
