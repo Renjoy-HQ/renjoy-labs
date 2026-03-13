@@ -862,10 +862,10 @@ export default function RenjoyAILanding() {
                       }}
                       onFocus={(e) => e.target.style.borderColor = "rgba(212,137,122,0.4)"}
                       onBlur={(e) => e.target.style.borderColor = "rgba(212,137,122,0.15)"}
-                      onKeyDown={(e) => { if (e.key === "Enter" && modalEmail.includes("@")) setModalSubscribed(true); }}
+                      onKeyDown={(e) => { if (e.key === "Enter" && modalEmail.includes("@")) { setModalSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
                     />
                     <button
-                      onClick={() => { if (modalEmail.includes("@")) setModalSubscribed(true); }}
+                      onClick={() => { if (modalEmail.includes("@")) { setModalSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
                       className="cta-btn cta-red"
                       style={{
                         padding: "14px 22px", borderRadius: "10px",
@@ -1649,7 +1649,7 @@ export default function RenjoyAILanding() {
                 />
                 <button
                   onClick={() => {
-                    if (email && email.includes("@")) setSubscribed(true);
+                    if (email && email.includes("@")) { setSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "inline" }); }
                   }}
                   className="cta-btn cta-red"
                   style={{
