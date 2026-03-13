@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useMemo } from "react";
+import { submitLead } from "../lib/submitLead";
 
 // ─── JSON-LD Structured Data ───
 const structuredData = {
@@ -862,10 +863,10 @@ export default function RenjoyAILanding() {
                       }}
                       onFocus={(e) => e.target.style.borderColor = "rgba(212,137,122,0.4)"}
                       onBlur={(e) => e.target.style.borderColor = "rgba(212,137,122,0.15)"}
-                      onKeyDown={(e) => { if (e.key === "Enter" && modalEmail.includes("@")) { setModalSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
+                      onKeyDown={(e) => { if (e.key === "Enter" && modalEmail.includes("@")) { setModalSubscribed(true); submitLead({ type: "newsletter", email: modalEmail, source: "homepage_modal" }); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
                     />
                     <button
-                      onClick={() => { if (modalEmail.includes("@")) { setModalSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
+                      onClick={() => { if (modalEmail.includes("@")) { setModalSubscribed(true); submitLead({ type: "newsletter", email: modalEmail, source: "homepage_modal" }); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "modal" }); } }}
                       className="cta-btn cta-red"
                       style={{
                         padding: "14px 22px", borderRadius: "10px",
@@ -1053,7 +1054,7 @@ export default function RenjoyAILanding() {
                     {/* Submit */}
                     <button
                       onClick={() => {
-                        if (contactForm.name && contactForm.email.includes("@")) setContactSent(true);
+                        if (contactForm.name && contactForm.email.includes("@")) { setContactSent(true); submitLead({ type: "contact", email: contactForm.email, name: contactForm.name, topic: contactForm.topic, message: contactForm.message, source: "homepage_contact" }); if (typeof gtag !== "undefined") gtag("event", "contact_form_submit"); }
                       }}
                       style={{
                         width: "100%", padding: "16px", borderRadius: "12px", border: "none",
@@ -1649,7 +1650,7 @@ export default function RenjoyAILanding() {
                 />
                 <button
                   onClick={() => {
-                    if (email && email.includes("@")) { setSubscribed(true); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "inline" }); }
+                    if (email && email.includes("@")) { setSubscribed(true); submitLead({ type: "newsletter", email, source: "homepage_inline" }); if (typeof gtag !== "undefined") gtag("event", "newsletter_signup", { method: "inline" }); }
                   }}
                   className="cta-btn cta-red"
                   style={{

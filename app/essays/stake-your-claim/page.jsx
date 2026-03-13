@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import { submitLead } from "../../../lib/submitLead";
 
 const META = {
   title: "Stake Your Claim",
@@ -205,8 +206,8 @@ export default function StakeYourClaim() {
                     <input type="email" placeholder="your@email.com" value={modalEmail} onChange={e=>setModalEmail(e.target.value)} autoFocus
                       style={{ flex:1,padding:"14px 18px",borderRadius:"10px",background:"rgba(25,12,18,0.55)",border:"1px solid rgba(212,137,122,0.15)",color:"#e8e4df",fontSize:"15px",fontFamily:"'Figtree',sans-serif",outline:"none" }}
                       onFocus={e=>e.target.style.borderColor="rgba(212,137,122,0.4)"} onBlur={e=>e.target.style.borderColor="rgba(212,137,122,0.15)"}
-                      onKeyDown={e=>{if(e.key==="Enter"&&modalEmail.includes("@"))setModalSubscribed(true)}} />
-                    <button onClick={()=>{if(modalEmail.includes("@"))setModalSubscribed(true)}} style={{ background:"linear-gradient(135deg,#e05a3a,#c94a30)",color:"#fff",padding:"14px 22px",borderRadius:"10px",border:"none",fontSize:"15px",fontWeight:600,cursor:"pointer",fontFamily:"'Figtree',sans-serif",whiteSpace:"nowrap" }}>Stake a Claim</button>
+                      onKeyDown={e=>{if(e.key==="Enter"&&modalEmail.includes("@")){setModalSubscribed(true);submitLead({type:"newsletter",email:modalEmail,source:"essay_stake-your-claim_modal"})}}} />
+                    <button onClick={()=>{if(modalEmail.includes("@")){setModalSubscribed(true);submitLead({type:"newsletter",email:modalEmail,source:"essay_stake-your-claim_modal"})}}} style={{ background:"linear-gradient(135deg,#e05a3a,#c94a30)",color:"#fff",padding:"14px 22px",borderRadius:"10px",border:"none",fontSize:"15px",fontWeight:600,cursor:"pointer",fontFamily:"'Figtree',sans-serif",whiteSpace:"nowrap" }}>Stake a Claim</button>
                   </div>
                   <p style={{ fontSize:"12px",color:"#4a4640",marginTop:"16px",fontFamily:"'JetBrains Mono',monospace",position:"relative" }}>No spam. Unsubscribe anytime.</p>
                 </>
@@ -433,7 +434,7 @@ export default function StakeYourClaim() {
               <div style={{ display: "flex", gap: "10px", maxWidth: "400px", margin: "0 auto" }}>
                 <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)}
                   style={{ flex: 1, padding: "12px 16px", borderRadius: "10px", background: "rgba(25,12,18,0.5)", border: "1px solid rgba(212,137,122,0.12)", color: "#e8e4df", fontSize: "15px", fontFamily: "'Figtree', sans-serif", outline: "none" }} />
-                <button onClick={() => { if (email.includes("@")) setSubscribed(true); }}
+                <button onClick={() => { if (email.includes("@")) { setSubscribed(true); submitLead({type:"newsletter",email,source:"essay_stake-your-claim_inline"}); } }}
                   style={{ background: "linear-gradient(135deg, #e05a3a, #c94a30)", color: "#fff", padding: "12px 20px", borderRadius: "10px", border: "none", fontSize: "14px", fontWeight: 600, cursor: "pointer", fontFamily: "'Figtree', sans-serif", whiteSpace: "nowrap" }}>
                   Stake a Claim
                 </button>
