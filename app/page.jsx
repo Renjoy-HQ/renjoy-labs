@@ -101,6 +101,7 @@ const ARTICLES = [
     readTime: "14 min",
     status: "Published",
     subtitle: "Why the best VRM companies won't look like VRM companies",
+    link: "/essays/the-mulrooney-play",
   },
   {
     tag: "The Incumbent's Dilemma",
@@ -110,6 +111,7 @@ const ARTICLES = [
     readTime: "16 min",
     status: "Published",
     subtitle: "Why the best operators are the most at risk",
+    link: "/essays/the-sutter-trap",
   },
   {
     tag: "Practical AI",
@@ -1371,7 +1373,8 @@ export default function RenjoyAILanding() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
               {ARTICLES.map((article, i) => (
-                <GlowCard key={i} className="article-card" style={{
+                <a key={i} href={article.link || undefined} style={{ textDecoration: "none", color: "inherit", display: "contents" }}>
+                <GlowCard className="article-card" style={{
                   background: article.status === "Published"
                     ? "rgba(212,137,122,0.02)"
                     : "rgba(255,235,232,0.018)",
@@ -1421,6 +1424,7 @@ export default function RenjoyAILanding() {
                     </div>
                   </div>
                 </GlowCard>
+                </a>
               ))}
             </div>
           </div>
