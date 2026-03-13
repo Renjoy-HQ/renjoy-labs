@@ -153,7 +153,7 @@ const PROJECTS = [
     name: "Market Intelligence",
     description:
       "Real-time scrapers that pull conversion rates, occupancy, and competitive pricing from Airbnb daily. Operators who see the market clearly price better and win more bookings.",
-    status: "Operators Are Building This",
+    status: "Operators Building",
     tech: ["Web Scraping", "Supabase", "Python"],
     icon: "◈",
   },
@@ -161,7 +161,7 @@ const PROJECTS = [
     name: "Automated Owner Reports",
     description:
       "AI-generated Slack or email reports that synthesize revenue, occupancy, and market position — sent daily or weekly with zero manual work. Owner trust goes up, churn goes down.",
-    status: "Operators Are Building This",
+    status: "Operators Building",
     tech: ["LLM", "Slack API", "Automation"],
     icon: "◆",
   },
@@ -177,7 +177,7 @@ const PROJECTS = [
     name: "AI Guest Communications",
     description:
       "Handles the predictable 90% of guest messages instantly, 24/7, in any language. Your team focuses on the 10% that actually needs a human — edge cases, recovery, genuine care.",
-    status: "Operators Are Building This",
+    status: "Operators Building",
     tech: ["NLP", "Messaging APIs"],
     icon: "◎",
   },
@@ -597,7 +597,7 @@ function StatusBadge({ status }) {
   const colors = {
     Live: { bg: "rgba(74, 222, 128, 0.1)", text: "#4ade80", dot: "#4ade80" },
     Published: { bg: "rgba(74, 222, 128, 0.1)", text: "#4ade80", dot: "#4ade80" },
-    "Operators Are Building This": { bg: "rgba(74, 222, 128, 0.08)", text: "#4ade80", dot: "#4ade80" },
+    "Operators Building": { bg: "rgba(74, 222, 128, 0.08)", text: "#4ade80", dot: "#4ade80" },
     "In Development": { bg: "rgba(212, 137, 122, 0.1)", text: "#d4897a", dot: "#d4897a" },
     Emerging: { bg: "rgba(212, 137, 122, 0.08)", text: "#d4897a", dot: "#d4897a" },
     Planned: { bg: "rgba(148, 143, 137, 0.1)", text: "#948f89", dot: "#948f89" },
