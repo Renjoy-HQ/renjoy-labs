@@ -635,6 +635,7 @@ export default function RenjoyAILanding() {
   const [showContact, setShowContact] = useState(false);
   const [contactForm, setContactForm] = useState({ name: "", email: "", topic: "", message: "" });
   const [contactSent, setContactSent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -642,12 +643,21 @@ export default function RenjoyAILanding() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { overflow-x: hidden; }
+        img, svg { max-width: 100%; }
 
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -727,7 +737,7 @@ export default function RenjoyAILanding() {
         {/* ══════ NAV ══════ */}
         <nav style={{
           position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-          padding: "20px 40px", display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: isMobile ? "16px 20px" : "20px 40px", display: "flex", justifyContent: "space-between", alignItems: "center",
           background: scrollY > 50 ? "rgba(30, 15, 22, 0.92)" : "transparent",
           backdropFilter: scrollY > 50 ? "blur(24px) saturate(1.2)" : "none",
           borderBottom: scrollY > 50 ? "1px solid rgba(212,137,122,0.06)" : "1px solid transparent",
@@ -742,26 +752,28 @@ export default function RenjoyAILanding() {
               border: "1px solid rgba(212,137,122,0.15)", marginLeft: "8px",
             }}>LABS</span>
           </div>
-          <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-            {["Articles", "Projects", "FAQ"].map((item) => (
+          <div style={{ display: "flex", gap: isMobile ? "12px" : "32px", alignItems: "center" }}>
+            {!isMobile && ["Articles", "Projects", "FAQ"].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="nav-link"
                 style={{ color: "#9a958e", textDecoration: "none", fontSize: "14px", fontWeight: 500, letterSpacing: "0.02em" }}>
                 {item}
               </a>
             ))}
-            <button onClick={() => setShowModal(true)} style={{
-              background: "none", border: "1px solid rgba(212,137,122,0.2)", color: "#d4897a",
-              padding: "8px 20px", borderRadius: "8px", fontSize: "13px", fontWeight: 600,
-              cursor: "pointer", fontFamily: "'Figtree', sans-serif", letterSpacing: "0.02em",
-              transition: "all 0.2s ease",
-            }}
-              onMouseEnter={e => { e.target.style.background = "rgba(212,137,122,0.08)"; e.target.style.borderColor = "rgba(212,137,122,0.4)"; }}
-              onMouseLeave={e => { e.target.style.background = "none"; e.target.style.borderColor = "rgba(212,137,122,0.2)"; }}
-            >Subscribe</button>
+            {!isMobile && (
+              <button onClick={() => setShowModal(true)} style={{
+                background: "none", border: "1px solid rgba(212,137,122,0.2)", color: "#d4897a",
+                padding: "8px 20px", borderRadius: "8px", fontSize: "13px", fontWeight: 600,
+                cursor: "pointer", fontFamily: "'Figtree', sans-serif", letterSpacing: "0.02em",
+                transition: "all 0.2s ease",
+              }}
+                onMouseEnter={e => { e.target.style.background = "rgba(212,137,122,0.08)"; e.target.style.borderColor = "rgba(212,137,122,0.4)"; }}
+                onMouseLeave={e => { e.target.style.background = "none"; e.target.style.borderColor = "rgba(212,137,122,0.2)"; }}
+              >Subscribe</button>
+            )}
             <button onClick={() => setShowContact(true)} className="cta-btn" style={{
               background: "linear-gradient(135deg, #e05a3a, #c94a30)",
-              color: "#fff", padding: "10px 24px", borderRadius: "8px",
-              border: "none", fontSize: "14px", fontWeight: 600, cursor: "pointer",
+              color: "#fff", padding: isMobile ? "8px 16px" : "10px 24px", borderRadius: "8px",
+              border: "none", fontSize: isMobile ? "13px" : "14px", fontWeight: 600, cursor: "pointer",
               fontFamily: "'Figtree', sans-serif",
             }}>Let's Talk AI</button>
           </div>
@@ -848,7 +860,7 @@ export default function RenjoyAILanding() {
 
               {!modalSubscribed ? (
                 <>
-                  <div style={{ display: "flex", gap: "10px", maxWidth: "360px", margin: "0 auto", position: "relative" }}>
+                  <div style={{ display: "flex", gap: "10px", maxWidth: "360px", margin: "0 auto", position: "relative", flexDirection: isMobile ? "column" : "row" }}>
                     <input
                       type="email"
                       placeholder="your@email.com"
@@ -1096,7 +1108,7 @@ export default function RenjoyAILanding() {
         {/* ══════ HERO ══════ */}
         <section style={{
           minHeight: "100vh", display: "flex", flexDirection: "column",
-          justifyContent: "center", padding: "160px 40px 80px", position: "relative",
+          justifyContent: "center", padding: isMobile ? "120px 20px 60px" : "160px 40px 80px", position: "relative",
           overflow: "hidden", zIndex: 2,
         }}>
           <TopographicLines />
@@ -1131,8 +1143,9 @@ export default function RenjoyAILanding() {
 
             <h1 className="fade-in fade-in-d2" style={{
               fontFamily: "'Figtree', sans-serif",
-              fontSize: "clamp(48px, 7vw, 84px)", fontWeight: 800,
-              lineHeight: 1.05, letterSpacing: "-0.03em", maxWidth: "900px", marginBottom: "32px",
+              fontSize: isMobile ? "36px" : "clamp(48px, 7vw, 84px)", fontWeight: 800,
+              lineHeight: 1.1, letterSpacing: "-0.03em", maxWidth: "900px", marginBottom: "32px",
+              wordBreak: "break-word",
             }}>
               The VRM industry<br />is in a{" "}
               <span style={{
@@ -1144,22 +1157,22 @@ export default function RenjoyAILanding() {
             </h1>
 
             <p className="fade-in fade-in-d3" style={{
-              fontSize: "20px", lineHeight: 1.7, color: "#a8a29e", maxWidth: "580px", marginBottom: "48px",
+              fontSize: isMobile ? "16px" : "20px", lineHeight: 1.7, color: "#a8a29e", maxWidth: "580px", marginBottom: "48px",
             }}>
               AI is rewriting how vacation rentals are managed — pricing, guest comms, owner reporting, all of it. We're an operator in Colorado figuring this out in real time and sharing everything. Essays, tools, and honest conversations for VRM operators who'd rather build than wait.
             </p>
 
-            <div className="fade-in fade-in-d4" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <div className="fade-in fade-in-d4" style={{ display: "flex", gap: "12px", flexWrap: "wrap", flexDirection: isMobile ? "column" : "row" }}>
               <a href="#featured" className="cta-btn cta-red" style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
-                padding: "16px 32px", borderRadius: "10px", textDecoration: "none",
-                fontSize: "16px", fontWeight: 600,
+                padding: isMobile ? "14px 24px" : "16px 32px", borderRadius: "10px", textDecoration: "none",
+                fontSize: isMobile ? "15px" : "16px", fontWeight: 600,
               }}>Read "Stake Your Claim" <span style={{ fontSize: "18px" }}>→</span></a>
               <button onClick={() => setShowContact(true)} className="cta-btn-outline" style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
                 background: "rgba(240,76,59,0.04)", color: "#ede8e2",
-                padding: "16px 32px", borderRadius: "10px",
-                fontSize: "16px", fontWeight: 500, border: "1px solid rgba(240,76,59,0.25)",
+                padding: isMobile ? "14px 24px" : "16px 32px", borderRadius: "10px",
+                fontSize: isMobile ? "15px" : "16px", fontWeight: 500, border: "1px solid rgba(240,76,59,0.25)",
                 cursor: "pointer", fontFamily: "'Figtree', sans-serif",
               }}>Talk to Us About AI</button>
             </div>
@@ -1177,14 +1190,14 @@ export default function RenjoyAILanding() {
         </section>
 
         {/* ══════ STATS BAR ══════ */}
-        <section style={{ padding: "60px 40px", position: "relative", zIndex: 2 }}>
+        <section style={{ padding: isMobile ? "40px 20px" : "60px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={4} seed={1} />
           <SectionDivider variant="wave" />
           <div style={{
             maxWidth: "1200px", margin: "20px auto 0", display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)", gap: "40px",
+            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: isMobile ? "24px" : "40px",
             background: "rgba(212,137,122,0.015)", borderRadius: "20px",
-            padding: "48px 40px", border: "1px solid rgba(212,137,122,0.06)",
+            padding: isMobile ? "32px 20px" : "48px 40px", border: "1px solid rgba(212,137,122,0.06)",
             position: "relative", overflow: "hidden",
           }}>
             <div style={{
@@ -1205,7 +1218,7 @@ export default function RenjoyAILanding() {
                   background: "rgba(212,137,122,0.08)",
                 }} />}
                 <div style={{
-                  fontFamily: "'Figtree', sans-serif", fontSize: "46px", fontWeight: 700,
+                  fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "36px" : "46px", fontWeight: 700,
                   color: "#d4897a", marginBottom: "8px", textShadow: "0 0 40px rgba(212,137,122,0.15)",
                 }}>{stat.value}</div>
                 <div style={{
@@ -1218,10 +1231,10 @@ export default function RenjoyAILanding() {
         </section>
 
         {/* ══════ FEATURED ARTICLE ══════ */}
-        <section id="featured" style={{ padding: "120px 40px", position: "relative", zIndex: 2 }}>
+        <section id="featured" style={{ padding: isMobile ? "60px 20px" : "120px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={6} seed={2} />
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "80px", alignItems: "center" }}>
               {/* Left: Visual Card */}
               <div style={{
                 position: "relative", aspectRatio: "4/3", borderRadius: "20px", overflow: "hidden",
@@ -1304,11 +1317,11 @@ export default function RenjoyAILanding() {
                   }}>{FEATURED_ARTICLE.tag} · {FEATURED_ARTICLE.date}</span>
                 </div>
                 <h2 style={{
-                  fontFamily: "'Figtree', sans-serif", fontSize: "48px", fontWeight: 800,
+                  fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "34px" : "48px", fontWeight: 800,
                   lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "12px",
                 }}>{FEATURED_ARTICLE.title}</h2>
                 <p style={{
-                  fontSize: "20px", color: "#9a958e", fontStyle: "italic", marginBottom: "24px",
+                  fontSize: isMobile ? "16px" : "20px", color: "#9a958e", fontStyle: "italic", marginBottom: "24px",
                   fontFamily: "'Figtree', sans-serif",
                 }}>{FEATURED_ARTICLE.subtitle}</p>
                 <p style={{
@@ -1348,10 +1361,10 @@ export default function RenjoyAILanding() {
         <SectionDivider />
 
         {/* ══════ ARTICLES ══════ */}
-        <section id="articles" style={{ padding: "120px 40px", position: "relative", zIndex: 2 }}>
+        <section id="articles" style={{ padding: isMobile ? "60px 20px" : "120px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={5} seed={3} />
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "60px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", marginBottom: isMobile ? "40px" : "60px", flexDirection: isMobile ? "column" : "row", gap: isMobile ? "16px" : "0" }}>
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
                   <div style={{ width: "24px", height: "1px", background: "#d4897a" }} />
@@ -1360,19 +1373,19 @@ export default function RenjoyAILanding() {
                     letterSpacing: "0.15em", textTransform: "uppercase", color: "#d4897a",
                   }}>The Essay Series</span>
                 </div>
-                <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: "42px", fontWeight: 800, letterSpacing: "-0.02em" }}>
+                <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "32px" : "42px", fontWeight: 800, letterSpacing: "-0.02em" }}>
                   From the Frontier
                 </h2>
                 <p style={{ fontSize: "15px", color: "#6b6760", marginTop: "8px" }}>
                   By Jacob Mueller, CEO of Renjoy
                 </p>
               </div>
-              <p style={{ fontSize: "16px", color: "#9a958e", maxWidth: "420px", lineHeight: 1.6, textAlign: "right" }}>
+              <p style={{ fontSize: "15px", color: "#9a958e", maxWidth: isMobile ? "100%" : "420px", lineHeight: 1.6, textAlign: isMobile ? "left" : "right" }}>
                 A series on what the gold rushes teach us about building hospitality companies in the age of AI. Written for operators, owners, and builders.
               </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "24px" }}>
               {ARTICLES.map((article, i) => (
                 <a key={i} href={article.link || undefined} style={{ textDecoration: "none", color: "inherit", display: "contents" }}>
                 <GlowCard className="article-card" style={{
@@ -1434,7 +1447,7 @@ export default function RenjoyAILanding() {
         <SectionDivider />
 
         {/* ══════ AI PROJECTS ══════ */}
-        <section id="projects" style={{ padding: "120px 40px", position: "relative", zIndex: 2 }}>
+        <section id="projects" style={{ padding: isMobile ? "60px 20px" : "120px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={7} seed={4} />
           <div style={{
             position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)",
@@ -1453,7 +1466,7 @@ export default function RenjoyAILanding() {
                 }}>What's Possible Right Now</span>
                 <div style={{ width: "40px", height: "1px", background: "linear-gradient(90deg, #d4897a, transparent)" }} />
               </div>
-              <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: "42px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "16px" }}>
+              <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "32px" : "42px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "16px" }}>
                 AI in VRM Operations
               </h2>
               <p style={{ fontSize: "17px", color: "#a8a29e", maxWidth: "580px", margin: "0 auto", lineHeight: 1.6 }}>
@@ -1461,7 +1474,7 @@ export default function RenjoyAILanding() {
               </p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "20px" }}>
               {PROJECTS.map((project, i) => (
                 <GlowCard key={i} className="project-card" style={{
                   background: "rgba(255,235,232,0.015)", border: "1px solid rgba(255,255,255,0.05)",
@@ -1506,7 +1519,7 @@ export default function RenjoyAILanding() {
         <SectionDivider variant="wave" />
 
         {/* ══════ QUOTE ══════ */}
-        <section style={{ padding: "120px 40px", textAlign: "center", position: "relative", zIndex: 2 }}>
+        <section style={{ padding: isMobile ? "60px 20px" : "120px 40px", textAlign: "center", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={4} seed={5} />
           <div style={{
             position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
@@ -1522,7 +1535,7 @@ export default function RenjoyAILanding() {
               color: "rgba(212,137,122,0.06)", lineHeight: 0.5, marginBottom: "20px",
             }}>"</div>
             <blockquote style={{
-              fontFamily: "'Figtree', sans-serif", fontSize: "36px", fontWeight: 700,
+              fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "22px" : "36px", fontWeight: 700,
               lineHeight: 1.4, fontStyle: "italic", marginBottom: "24px",
             }}>
               The opportunity wasn't in the gold.<br />
@@ -1541,7 +1554,7 @@ export default function RenjoyAILanding() {
         <SectionDivider />
 
         {/* ══════ FAQ ══════ */}
-        <section id="faq" style={{ padding: "120px 40px", position: "relative", zIndex: 2 }}>
+        <section id="faq" style={{ padding: isMobile ? "60px 20px" : "120px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={4} seed={6} />
           <div style={{ maxWidth: "800px", margin: "0 auto" }}>
             <div style={{ marginBottom: "60px" }}>
@@ -1552,13 +1565,13 @@ export default function RenjoyAILanding() {
                   letterSpacing: "0.15em", textTransform: "uppercase", color: "#d4897a",
                 }}>Frequently Asked</span>
               </div>
-              <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: "42px", fontWeight: 800 }}>
+              <h2 style={{ fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "32px" : "42px", fontWeight: 800 }}>
                 AI & Vacation Rental<br />Management
               </h2>
             </div>
             <div style={{
               background: "rgba(255,235,232,0.012)", borderRadius: "20px",
-              border: "1px solid rgba(255,255,255,0.04)", padding: "8px 40px",
+              border: "1px solid rgba(255,255,255,0.04)", padding: isMobile ? "8px 16px" : "8px 40px",
             }}>
               {FAQ_ITEMS.map((item, i) => (
                 <FAQItem key={i} item={item} isOpen={openFAQ === i}
@@ -1571,13 +1584,13 @@ export default function RenjoyAILanding() {
         <SectionDivider variant="wave" />
 
         {/* ══════ NEWSLETTER ══════ */}
-        <section id="newsletter" style={{ padding: "100px 40px", position: "relative", zIndex: 2 }}>
+        <section id="newsletter" style={{ padding: isMobile ? "60px 20px" : "100px 40px", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={5} seed={8} />
           <div style={{
             maxWidth: "680px", margin: "0 auto", position: "relative",
             background: "linear-gradient(135deg, rgba(212,137,122,0.04), rgba(212,137,122,0.015))",
             borderRadius: "24px", border: "1px solid rgba(212,137,122,0.1)",
-            padding: "56px 48px", textAlign: "center",
+            padding: isMobile ? "40px 24px" : "56px 48px", textAlign: "center",
             boxShadow: "0 0 80px rgba(212,137,122,0.03), inset 0 1px 0 rgba(212,137,122,0.08)",
             overflow: "hidden",
           }}>
@@ -1632,7 +1645,7 @@ export default function RenjoyAILanding() {
             {!subscribed ? (
               <div style={{
                 display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto",
-                position: "relative",
+                position: "relative", flexDirection: isMobile ? "column" : "row",
               }}>
                 <input
                   type="email"
@@ -1691,7 +1704,7 @@ export default function RenjoyAILanding() {
         <SectionDivider />
 
         {/* ══════ CTA ══════ */}
-        <section id="connect" style={{ padding: "120px 40px 160px", textAlign: "center", position: "relative", zIndex: 2 }}>
+        <section id="connect" style={{ padding: isMobile ? "60px 20px 100px" : "120px 40px 160px", textAlign: "center", position: "relative", zIndex: 2 }}>
           <SectionFlakes count={5} seed={7} />
           <div style={{
             position: "absolute", bottom: "-100px", left: "50%", transform: "translateX(-50%)",
@@ -1718,7 +1731,7 @@ export default function RenjoyAILanding() {
               marginBottom: "20px", display: "block",
             }}>Let's Connect</span>
             <h2 style={{
-              fontFamily: "'Figtree', sans-serif", fontSize: "48px", fontWeight: 800,
+              fontFamily: "'Figtree', sans-serif", fontSize: isMobile ? "32px" : "48px", fontWeight: 800,
               lineHeight: 1.15, marginBottom: "20px",
             }}>Fellow operator?<br />Let's compare notes.</h2>
             <p style={{
@@ -1727,19 +1740,20 @@ export default function RenjoyAILanding() {
             }}>
               If you're running a VRM company and thinking about AI — what to try, what to skip, how to avoid the Sutter Trap — we'd love to swap stories. No pitch. Just two operators figuring out what's next.
             </p>
-            <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", flexDirection: isMobile ? "column" : "row", alignItems: "center" }}>
               <button onClick={() => setShowContact(true)} className="cta-btn" style={{
                 display: "inline-flex", alignItems: "center", gap: "10px",
                 background: "linear-gradient(135deg, #e05a3a, #c94a30)", color: "#fff",
-                padding: "18px 40px", borderRadius: "12px",
-                fontSize: "17px", fontWeight: 600, border: "none", cursor: "pointer",
-                fontFamily: "'Figtree', sans-serif",
+                padding: isMobile ? "15px 32px" : "18px 40px", borderRadius: "12px",
+                fontSize: isMobile ? "15px" : "17px", fontWeight: 600, border: "none", cursor: "pointer",
+                fontFamily: "'Figtree', sans-serif", width: isMobile ? "100%" : "auto", justifyContent: "center",
               }}>Start a Conversation</button>
               <a href="https://renjoy.com" className="cta-btn-outline" style={{
                 display: "inline-flex", alignItems: "center", gap: "10px",
                 background: "rgba(212,137,122,0.04)", color: "#e8e4df",
-                padding: "18px 40px", borderRadius: "12px", textDecoration: "none",
-                fontSize: "17px", fontWeight: 500, border: "1px solid rgba(212,137,122,0.15)",
+                padding: isMobile ? "15px 32px" : "18px 40px", borderRadius: "12px", textDecoration: "none",
+                fontSize: isMobile ? "15px" : "17px", fontWeight: 500, border: "1px solid rgba(212,137,122,0.15)",
+                width: isMobile ? "100%" : "auto", justifyContent: "center",
               }}>Visit Renjoy →</a>
             </div>
           </div>
@@ -1747,9 +1761,11 @@ export default function RenjoyAILanding() {
 
         {/* ══════ FOOTER ══════ */}
         <footer style={{
-          padding: "40px", borderTop: "1px solid rgba(212,137,122,0.06)",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: isMobile ? "32px 20px" : "40px", borderTop: "1px solid rgba(212,137,122,0.06)",
+          display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "center",
+          flexDirection: isMobile ? "column" : "row", gap: isMobile ? "16px" : "0",
           maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 2,
+          textAlign: isMobile ? "center" : "left",
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>renjoy</span>
