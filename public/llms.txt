@@ -1,0 +1,25 @@
+# Renjoy Labs
+
+> Essays, tools, and honest conversations about AI in vacation rental management.
+
+Renjoy Labs is the thought leadership hub of Renjoy, an AI-first vacation rental management company operating 200+ properties across Colorado and Florida. CEO Jacob Mueller writes about what the team is learning as they build.
+
+## Essays
+
+- [Stake Your Claim](https://labs.renjoy.com/essays/stake-your-claim): What the gold rushes actually teach us about the AI frontier. Only 1% of gold rush miners got rich. The people who built the tools built dynasties.
+- [The Mulrooney Play](https://labs.renjoy.com/essays/the-mulrooney-play): Why the best VRM companies won't look like VRM companies. The real opportunity is becoming a hospitality company that happens to manage vacation rentals.
+- [The Sutter Trap](https://labs.renjoy.com/essays/the-sutter-trap): Why the best operators are the most at risk. The operators most at risk aren't the struggling ones — they're the ones doing well.
+
+## Key Concepts
+
+- **The Sutter Trap**: When a successful operator's working business model prevents them from adapting to AI. Named after John Sutter, who owned the land where gold was discovered but lost everything.
+- **The Mulrooney Play**: Reframing VRM from property management to hospitality. Named after Belinda Mulrooney, who built Dawson's finest hotel during the Klondike gold rush.
+- **Finding Color**: The early stage of AI adoption where you can see it working but can't yet prove it at scale. A mining term for when gold particles first appear in your pan.
+- **AI-first operations**: Building operations around AI from the ground up rather than bolting AI onto legacy workflows.
+
+## About
+
+- Company: Renjoy (https://renjoy.com)
+- Author: Jacob Mueller, CEO
+- Markets: El Paso County, Chaffee County, Teller County (Colorado)
+- Newsletter: The Mining Report (biweekly)
