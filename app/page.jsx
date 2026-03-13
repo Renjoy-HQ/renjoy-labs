@@ -646,6 +646,7 @@ export default function RenjoyAILanding() {
   const [contactForm, setContactForm] = useState({ name: "", email: "", topic: "", message: "" });
   const [contactSent, setContactSent] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showAllArticles, setShowAllArticles] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -1400,7 +1401,7 @@ export default function RenjoyAILanding() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "24px" }}>
-              {ARTICLES.map((article, i) => (
+              {(showAllArticles ? ARTICLES : ARTICLES.slice(0, 6)).map((article, i) => (
                 <a key={i} href={article.link || undefined} style={{ textDecoration: "none", color: "inherit", display: "contents" }}>
                 <GlowCard className="article-card" style={{
                   background: article.status === "Published"
@@ -1455,6 +1456,24 @@ export default function RenjoyAILanding() {
                 </a>
               ))}
             </div>
+            {ARTICLES.length > 6 && (
+              <div style={{ textAlign: "center", marginTop: "40px" }}>
+                <button
+                  onClick={() => setShowAllArticles(!showAllArticles)}
+                  style={{
+                    padding: "12px 32px", borderRadius: "100px", fontSize: "14px", fontWeight: 600,
+                    fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.06em",
+                    cursor: "pointer", transition: "all 0.2s",
+                    background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,137,122,0.15)",
+                    color: "#9a958e",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "#d4897a"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.4)"; e.currentTarget.style.background = "rgba(212,137,122,0.06)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = "#9a958e"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.15)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
+                >
+                  {showAllArticles ? "Show less" : `Show ${ARTICLES.length - 6} more`}
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
