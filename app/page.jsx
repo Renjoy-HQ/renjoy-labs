@@ -160,6 +160,14 @@ const ARTICLES = [
 
 const PROJECTS = [
   {
+    name: "Maintenance Auto-Dispatch",
+    description: "Watches Breezeway for new tasks, classifies them across 89 rules, matches the right tech by skill and clock-in status, and delivers a Slack DM — all within 5 minutes of task creation. Zero manual triage.",
+    status: "Renjoy Built",
+    tech: ["n8n", "Supabase", "Slack API", "Breezeway"],
+    icon: "⚙",
+    link: "/projects/maintenance-auto-dispatch",
+  },
+  {
     name: "Market Intelligence",
     description:
       "Real-time scrapers that pull conversion rates, occupancy, and competitive pricing from Airbnb daily. Operators who see the market clearly price better and win more bookings.",
@@ -171,7 +179,7 @@ const PROJECTS = [
     name: "Automated Owner Reports",
     description:
       "AI-generated Slack or email reports that synthesize revenue, occupancy, and market position — sent daily or weekly with zero manual work. Owner trust goes up, churn goes down.",
-    status: "Operators Building",
+    status: "Renjoy Built",
     tech: ["LLM", "Slack API", "Automation"],
     icon: "◆",
   },
@@ -187,7 +195,7 @@ const PROJECTS = [
     name: "AI Guest Communications",
     description:
       "Handles the predictable 90% of guest messages instantly, 24/7, in any language. Your team focuses on the 10% that actually needs a human — edge cases, recovery, genuine care.",
-    status: "Operators Building",
+    status: "Renjoy Built",
     tech: ["NLP", "Messaging APIs"],
     icon: "◎",
   },
@@ -612,6 +620,7 @@ function StatusBadge({ status }) {
     Emerging: { bg: "rgba(212, 137, 122, 0.08)", text: "#d4897a", dot: "#d4897a" },
     Planned: { bg: "rgba(148, 143, 137, 0.1)", text: "#948f89", dot: "#948f89" },
     "Coming Soon": { bg: "rgba(148, 143, 137, 0.1)", text: "#948f89", dot: "#948f89" },
+    "Renjoy Built": { bg: "rgba(212, 137, 122, 0.12)", text: "#d4897a", dot: "#d4897a" },
   };
   const c = colors[status] || colors["Planned"];
   return (
@@ -1509,9 +1518,10 @@ export default function RenjoyAILanding() {
 
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "20px" }}>
               {PROJECTS.map((project, i) => (
-                <GlowCard key={i} className="project-card" style={{
+                <a key={i} href={project.link || undefined} style={{ textDecoration: "none", color: "inherit", display: "contents" }}>
+                <GlowCard className="project-card" style={{
                   background: "rgba(255,235,232,0.015)", border: "1px solid rgba(255,255,255,0.05)",
-                  borderRadius: "20px", cursor: "default", overflow: "hidden",
+                  borderRadius: "20px", cursor: project.link ? "pointer" : "default", overflow: "hidden",
                 }}>
                   <div style={{ padding: "32px", position: "relative" }}>
                     <div style={{
@@ -1544,6 +1554,7 @@ export default function RenjoyAILanding() {
                     </div>
                   </div>
                 </GlowCard>
+                </a>
               ))}
             </div>
           </div>
