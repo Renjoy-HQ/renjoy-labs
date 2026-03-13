@@ -62,7 +62,82 @@ function SectionFlakes({ count = 5, seed = 0 }) {
   );
 }
 
-function PQ({children}){return(<blockquote style={{margin:"48px 0",padding:"32px 0 32px 32px",borderLeft:"2px solid rgba(212,137,122,0.3)",fontFamily:"'Figtree',sans-serif",fontSize:"24px",fontWeight:700,lineHeight:1.45,fontStyle:"italic",color:"#e8e4df",maxWidth:"600px"}}>{children}</blockquote>);}
+function PQ({ children, tweet }) {
+  const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+  const tweetUrl = tweet ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${tweet}" — via @Jacobtmueller`)}&url=${encodeURIComponent(pageUrl)}` : null;
+  return (
+    <div style={{ position: "relative", margin: "48px 0" }}>
+      <blockquote style={{ margin: 0, padding: "32px 0 32px 32px", borderLeft: "2px solid rgba(212,137,122,0.3)", fontFamily: "'Figtree', sans-serif", fontSize: "24px", fontWeight: 700, lineHeight: 1.45, fontStyle: "italic", color: "#e8e4df", maxWidth: "600px" }}>
+        {children}
+      </blockquote>
+      {tweetUrl && (
+        <a href={tweetUrl} target="_blank" rel="noopener noreferrer" title="Tweet this quote" style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginTop: "8px", marginLeft: "32px", padding: "5px 12px", borderRadius: "100px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#6b6760", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", textDecoration: "none", transition: "all 0.2s", letterSpacing: "0.04em" }}
+          onMouseEnter={e => { e.currentTarget.style.color = "#d4897a"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.25)"; e.currentTarget.style.background = "rgba(212,137,122,0.06)"; }}
+          onMouseLeave={e => { e.currentTarget.style.color = "#6b6760"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Tweet this
+        </a>
+      )}
+    </div>
+  );
+}
+
+function ShareBar({ url, title }) {
+  const [copied, setCopied] = useState(false);
+
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+  const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+
+  function copyLink() {
+    if (typeof navigator !== "undefined") {
+      navigator.clipboard.writeText(url).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    }
+  }
+
+  const btnStyle = {
+    display: "inline-flex", alignItems: "center", gap: "6px",
+    padding: "7px 14px", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
+    fontFamily: "'JetBrains Mono', monospace", cursor: "pointer",
+    border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)",
+    color: "#9a958e", textDecoration: "none", transition: "all 0.2s",
+    letterSpacing: "0.02em",
+  };
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#4a4640", letterSpacing: "0.08em", textTransform: "uppercase", marginRight: "4px" }}>Share</span>
+      <a href={xUrl} target="_blank" rel="noopener noreferrer" style={btnStyle}
+        onMouseEnter={e => { e.currentTarget.style.color = "#d4897a"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.25)"; e.currentTarget.style.background = "rgba(212,137,122,0.06)"; }}
+        onMouseLeave={e => { e.currentTarget.style.color = "#9a958e"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </a>
+      <a href={liUrl} target="_blank" rel="noopener noreferrer" style={btnStyle}
+        onMouseEnter={e => { e.currentTarget.style.color = "#d4897a"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.25)"; e.currentTarget.style.background = "rgba(212,137,122,0.06)"; }}
+        onMouseLeave={e => { e.currentTarget.style.color = "#9a958e"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <button onClick={copyLink} style={{ ...btnStyle, border: "1px solid rgba(255,255,255,0.08)" }}
+        onMouseEnter={e => { e.currentTarget.style.color = "#d4897a"; e.currentTarget.style.borderColor = "rgba(212,137,122,0.25)"; e.currentTarget.style.background = "rgba(212,137,122,0.06)"; }}
+        onMouseLeave={e => { e.currentTarget.style.color = "#9a958e"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
+      >
+        {copied ? (
+          <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!</>
+        ) : (
+          <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy link</>
+        )}
+      </button>
+    </div>
+  );
+}
+
 function H2({children,id}){return(<h2 id={id} style={{fontFamily:"'Figtree',sans-serif",fontSize:"32px",fontWeight:800,lineHeight:1.2,letterSpacing:"-0.02em",marginTop:"64px",marginBottom:"24px",color:"#e8e4df",scrollMarginTop:"80px"}}>{children}</h2>);}
 function P({children}){return(<p style={{fontSize:"18px",lineHeight:1.8,color:"#b5b0a8",marginBottom:"24px"}}>{children}</p>);}
 function B({children}){return(<strong style={{color:"#e8e4df",fontWeight:600}}>{children}</strong>);}
@@ -147,6 +222,9 @@ export default function SutterTrap() {
                 ))}
               </div>
             </div>
+            <div style={{ marginTop: "20px", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+              <ShareBar url="https://labs.renjoy.com/essays/the-sutter-trap" title="The Sutter Trap — Renjoy Labs" />
+            </div>
           </div>
         </header>
 
@@ -180,7 +258,7 @@ export default function SutterTrap() {
 
             <P>His workers deserted. First in small groups, then all of them, from the clerks to the cooks. Squatters overran his land. His livestock was stolen. His crops went unharvested. He spent the last decades of his life petitioning Congress for compensation that never came. He died in 1880 in a Washington D.C. boarding house, essentially broke.</P>
 
-            <PQ>The man at the epicenter of the greatest wealth event in American history lost everything. Not because the opportunity wasn't real, but because he couldn't let go of the model that used to work.</PQ>
+            <PQ tweet="The man at the epicenter of the greatest wealth event in American history lost everything. Not because the opportunity wasn't real, but because he couldn't let go of the model that used to work.">The man at the epicenter of the greatest wealth event in American history lost everything. Not because the opportunity wasn't real, but because he couldn't let go of the model that used to work.</PQ>
 
             <H2 id="what-is">What is the Sutter Trap?</H2>
 
@@ -212,7 +290,7 @@ export default function SutterTrap() {
 
             <P>Meanwhile, a different kind of operator is emerging. They're smaller, leaner, and built from day one around AI as a core operating layer — not a bolt-on. They don't have legacy processes to protect because they never had them. They look unimpressive today. They're managing 30 units. Maybe 40. Their brand isn't polished. They don't have your market relationships.</P>
 
-            <PQ>But they're improving fast. And they're improving on a cost curve that your model can't match.</PQ>
+            <PQ tweet="But they're improving fast. And they're improving on a cost curve that your model can't match.">But they're improving fast. And they're improving on a cost curve that your model can't match.</PQ>
 
             <P>This is exactly how disruption works. The new entrant isn't better than the incumbent on the metrics the incumbent cares about. Not yet. But they're operating on fundamentally different economics. And by the time the incumbent notices, the gap has already closed.</P>
 
@@ -267,6 +345,14 @@ export default function SutterTrap() {
             </div>
           </div>
         </article>
+
+        {/* ═══ SHARE BAR ═══ */}
+        <div style={{ maxWidth: "720px", margin: "0 auto", padding: "48px 40px 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#6b6760", letterSpacing: "0.06em", textTransform: "uppercase", margin: 0 }}>If this was useful, share it</p>
+            <ShareBar url="https://labs.renjoy.com/essays/the-sutter-trap" title="The Sutter Trap — Renjoy Labs" />
+          </div>
+        </div>
 
         <section id="newsletter" style={{padding:"80px 40px",position:"relative",zIndex:2}}>
           <div style={{maxWidth:"600px",margin:"0 auto",background:"linear-gradient(135deg,rgba(212,137,122,0.04),rgba(212,137,122,0.015))",borderRadius:"20px",border:"1px solid rgba(212,137,122,0.1)",padding:"48px 40px",textAlign:"center"}}>
