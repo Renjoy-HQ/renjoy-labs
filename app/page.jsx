@@ -1045,7 +1045,7 @@ export default function RenjoyAILanding() {
                     {/* Topic */}
                     <div>
                       <label style={{ display: "block", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: "#6b6760", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "6px" }}>What's on your mind?</label>
-                      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "auto auto auto auto", gap: "8px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
                         {[
                           "AI in my business",
                           "Property management",
@@ -1056,9 +1056,9 @@ export default function RenjoyAILanding() {
                             key={topic}
                             onClick={() => setContactForm({...contactForm, topic: contactForm.topic === topic ? "" : topic})}
                             style={{
-                              padding: "8px 16px", borderRadius: "100px", fontSize: "13px", fontWeight: 500,
+                              padding: "10px 16px", borderRadius: "100px", fontSize: "13px", fontWeight: 500,
                               cursor: "pointer", fontFamily: "'Figtree', sans-serif",
-                              transition: "all 0.2s",
+                              transition: "all 0.2s", textAlign: "center",
                               background: contactForm.topic === topic ? "rgba(212,137,122,0.15)" : "rgba(255,255,255,0.03)",
                               border: contactForm.topic === topic ? "1px solid rgba(212,137,122,0.35)" : "1px solid rgba(255,255,255,0.08)",
                               color: contactForm.topic === topic ? "#d4897a" : "#9a958e",
