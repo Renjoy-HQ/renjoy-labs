@@ -18,7 +18,6 @@ const TOC = [
   { id: "operational", label: "The hospitality difference is operational" },
   { id: "why-now", label: "Why this matters now" },
   { id: "practice", label: "What the Mulrooney Play looks like in practice" },
-  { id: "flywheel", label: "The flywheel underneath" },
   { id: "hardest", label: "The hardest part" },
   { id: "fairview", label: "The Fairview is still standing" },
 ];
@@ -257,9 +256,11 @@ export default function MulrooneyPlay() {
 
             <P>Mulrooney looked at the same scene everyone else did, but she saw something different. She didn't see a gold camp. She saw a town full of cold, dirty, lonely people with money and no place to spend it. She saw a hospitality market.</P>
 
-            <P>So she built the Fairview Hotel, which became Dawson's finest. Real beds. Hot baths. Dining service. She installed the town's first telephone. By 1902, her company was valued at over a million dollars — about $30 million today. She became the richest woman in the Klondike without ever swinging a pickaxe.</P>
+            <P>So she built the Fairview Hotel, which became Dawson's finest. Real beds. Hot baths. Dining service. She installed the town's first telephone. By 1902, her company was valued at over a million dollars (about $30 million today). She became the richest woman in the Klondike without ever swinging a pickaxe.</P>
 
-            <PQ tweet="The opportunity was never in the gold. It was in the people who came for the gold. And serving those people — really serving them — was a better business than mining ever was.">The opportunity was never in the gold. It was in the people who came for the gold. And serving those people — really serving them — was a better business than mining ever was.</PQ>
+            <P>I told Mulrooney's story briefly in my last essay, <a href="/essays/stake-your-claim" style={{color:"#d4897a",textDecoration:"none",borderBottom:"1px solid rgba(212,137,122,0.3)"}}>Stake Your Claim</a>, as one of several gold rush archetypes. But I've kept coming back to her specifically because I think she's the one who matters most for what's happening in the vacation rental industry right now.</P>
+
+            <P>The opportunity was never in the gold. It was in the people who came for the gold. And serving those people, really serving them, not just selling them a pan, was a better business than mining ever was.</P>
 
             <P>I think the vacation rental management industry is sitting in Dawson City right now, and most of us are still acting like miners.</P>
 
@@ -267,21 +268,21 @@ export default function MulrooneyPlay() {
 
             <P>Let me describe a business model and see if it sounds familiar.</P>
 
-            <P>You acquire a property, list it on platforms you don't control, and compete for bookings against hundreds of operators within a few miles of you. You earn a cut of whatever the platforms send your way. When something breaks you react, handle it, and move on to the next one.</P>
+            <P>You acquire a property. List it on platforms you don't control, then compete for bookings against hundreds of operators within a few miles. You earn a cut of whatever the platforms send your way, and when something breaks you react, handle it, move on. Rinse and repeat.</P>
 
             <P>Your operating rhythm is defined by turnovers: clean it, flip it, fill it. Your tech stack is a collection of point solutions duct-taped together by manual processes and tribal knowledge. And your owner relationships are, if you're being honest, largely transactional. They stay because you're performing a service. They leave when someone offers a lower fee, and you find it acceptable because 10% churn is industry standard.</P>
 
-            <P>This is the extraction model. It's how the vast majority of VRM companies operate. And I'm not saying it from a high horse. We've operated this way too.</P>
+            <P>This is the extraction model. It's how the vast majority of VRM companies operate. And I'm not saying it from a high horse because we've operated this way too. But AI is forcing a business model transformation whether we're ready for it or not. The tools that used to require an entire team now require a prompt. The question is whether you'll be the one who changes it, or whether a competitor with a smaller team and better systems does it for you.</P>
 
-            <P>The extraction model isn't stupid. It works. Properties book, revenue flows, and owners get checks. But it has a ceiling, and if you've been in this business long enough, you can feel it.</P>
+            <P>The extraction model isn't stupid; it works. Properties book, revenue flows, and owners get checks. But it has a ceiling, and if you've been in this business long enough, you can feel it. I've started calling this the "extraction vs hospitality" divide because I think it's the defining strategic choice for service businesses right now, not just in VRM, but anywhere that a company operates transactionally versus relationally.</P>
 
-            <P><B>You can't differentiate on the product.</B> Your competitors list on the same platforms, use the same pricing tools, hire from the same labor pool, and photograph the same mountain views. A three-bedroom cabin in the Rockies is a three-bedroom cabin in the Rockies.</P>
+            <P>You can't differentiate on the product. Your competitors list on the same platforms, use the same pricing tools, hire from the same labor pool, and photograph the same mountain views. A three-bedroom cabin in the Rockies is a three-bedroom cabin in the Rockies.</P>
 
-            <P><B>You can't differentiate on price.</B> Fees are compressing while OTA commissions keep climbing. Owner expectations keep rising. Racing to the bottom on management fees is a losing strategy, and everyone knows it, yet most of the industry does it anyway.</P>
+            <P>You can't differentiate on price. Fees are compressing while OTA commissions keep climbing. Owner expectations keep rising. Racing to the bottom on management fees is a losing strategy, and everyone knows it, yet most of the industry does it anyway.</P>
 
-            <P><B>You can't differentiate on scale alone.</B> Adding more properties to a broken operating model just multiplies the chaos. The operator who's drowning at 40 units doesn't magically start swimming at 80. If anything, the problems get heavier.</P>
+            <P>You can't differentiate on scale alone. Adding more properties to a broken operating model just multiplies the chaos. The operator who's drowning at 40 units doesn't magically start swimming at 80. If anything, the problems get heavier.</P>
 
-            <P>So if you can't win on product, price, or scale — what's left?</P>
+            <P>So if you can't win on product, price, or scale, what's left?</P>
 
             <H2 id="mulrooney-saw">What Mulrooney actually saw</H2>
 
@@ -289,13 +290,13 @@ export default function MulrooneyPlay() {
 
             <P>And the answer wasn't gold. Gold was the vehicle. What they actually wanted was comfort. Dignity. A hot bath after weeks on the trail. A real meal. A place that felt like civilization in the middle of the wilderness. They wanted to feel human again.</P>
 
-            <P>Mulrooney didn't reframe the product. She reframed the category. A gold camp isn't a mining operation. It's a town full of people with unmet needs. And the right business to build isn't a mining company — it's a hospitality company.</P>
+            <P>Mulrooney reframed the category. A gold camp isn't a mining operation. It's a town full of people with unmet needs and the right business to build isn't a mining company but rather a hospitality company.</P>
 
-            <P>The vacation rental industry is overdue for the same reframe. Most VRM companies define themselves by what they manage: properties. But properties don't have feelings. Properties don't refer their friends. Properties don't decide to stay or leave based on whether they feel valued.</P>
+            <P>The vacation rental industry is overdue for the same reframe. Most VRM companies define themselves by what they manage: properties. The name is right there in the category. Vacation Rental Management. But properties don't have feelings. They don't refer friends or decide to leave because they felt undervalued. People do.</P>
 
-            <P>People do.</P>
+            <P>Your owners are people who've entrusted you with their most valuable asset. Your guests are people spending their limited vacation time, often the only week they'll get all year, in a home you're responsible for. Your team members are people who show up every day to do physically and emotionally demanding work.</P>
 
-            <PQ tweet="The Mulrooney Play is the recognition that the best VRM companies won't look like VRM companies. They'll look like hospitality companies that happen to manage vacation rentals.">The Mulrooney Play is the recognition that the best VRM companies won't look like VRM companies. They'll look like hospitality companies that happen to manage vacation rentals.</PQ>
+            <P>The Mulrooney Play is the recognition that the best VRM companies won't look like VRM companies. They'll look like hospitality companies that happen to manage vacation rentals.</P>
 
             <H2 id="operational">The hospitality difference is operational, not aspirational</H2>
 
@@ -303,55 +304,49 @@ export default function MulrooneyPlay() {
 
             <P>The difference between a property management company that talks about hospitality and a hospitality company that manages properties is operational. It shows up in how you build your systems, what you measure, and where you invest.</P>
 
-            <P><B>A property manager measures occupancy. A hospitality company measures the guest experience.</B> Occupancy tells you whether the calendar is full. Guest experience tells you why it's full, or why it won't be next year. A property with 90% occupancy and a 4.2 guest rating is a ticking time bomb. A property at 71% occupancy with a 4.9 rating is a flywheel that's accelerating.</P>
+            <P>The clearest example is what you measure. Most VRM operators track occupancy. Occupancy tells you whether the calendar is full, but it doesn't tell you why it's full, or why it won't be next year.</P>
 
-            <P><B>A property manager reacts to owner complaints. A hospitality company prevents them.</B> If your owner relations strategy is "handle inbound tickets and send monthly statements," you're a property manager. If you're proactively communicating property health, surfacing investment opportunities, and building a relationship where the owner genuinely trusts your judgment, you're running a hospitality operation.</P>
+            <P>Owner relations is another one. If your strategy is "handle inbound tickets and send monthly statements," that's property management. There's nothing wrong with it, but there's a ceiling. The shift is toward proactive communication where the owner genuinely trusts your judgment before something goes wrong, not just after you've fixed it.</P>
 
-            <P><B>A property manager treats housekeeping as a cost center. A hospitality company treats it as the foundation.</B> Cleanliness is the single most cited factor in guest reviews, and it touches every single stay. If your cleaning team is managed reactively with no QA process, training standards, or career path, the foundation of your guest experience is held together by hope.</P>
+            <P>Housekeeping might be the starkest gap. Cleanliness is the single most cited factor in guest reviews and it touches every single stay. But most operators manage their cleaning team reactively with no real QA process, minimal training standards, and no career path. The foundation of their entire guest experience is basically held together by a few reliable people who happen to care.</P>
 
-            <P><B>A property manager uses technology to manage listings. A hospitality company uses technology to free people.</B> If your tech stack is a collection of platforms that each require a human to operate, you've adopted more work. The hospitality model automates the repetitive, predictable tasks so your people can focus on the moments that actually require a human: edge cases, recovery opportunities, and acts of genuine care that generate five-star reviews.</P>
+            <P>And then there's technology. This one took me longer to figure out. We kept adopting platforms that each required a human to operate, which meant we'd added complexity, not leverage. The hospitality model is different: automate the repetitive stuff so your people can focus on the moments that actually need a human like edge cases and recovery opportunities. The small acts of care that generate five-star reviews and that no software can replicate.</P>
+
+            <P>These are operational decisions you can make right now but they require a shift in what you think you're building.</P>
 
             <H2 id="why-now">Why this matters now</H2>
 
             <P>Three forces are converging that make the extraction model increasingly fragile and the hospitality model increasingly necessary.</P>
 
-            <P><B>AI is eliminating the task layer.</B> The things that used to differentiate a "good" property manager — fast response times, dynamic pricing, efficient scheduling — are becoming table stakes. When any operator can deploy an AI agent that responds to guest inquiries in under two minutes, 24/7, the execution floor rises for everyone. Competing on tasks is a race to parity. Competing on how your people make owners and guests <em>feel</em> is a race with no finish line.</P>
+            <P>The first is AI leveling the task layer. The things that used to differentiate a "good" property manager like fast response times, dynamic pricing, efficient scheduling, are becoming table stakes. AI is transforming customer experience across every service business, not just ours. When any operator can deploy an AI agent that responds to guest inquiries in under two minutes, 24/7, the execution floor rises for everyone. This is how AI changes what businesses compete on. It eliminates execution as a differentiator. Put another way, competing on task fulfillment is a race to parity. Contrast that with how your people make other people feel… now that's a race with no finish line.</P>
 
-            <P><B>Owner expectations are diverging from industry delivery.</B> Today's owners have been conditioned by consumer technology to expect transparency, real-time reporting, and proactive communication. They're comparing you to their wealth advisor, not to the last PM who ghosted them. The gap between what owners expect and what most VRMs deliver is widening every year.</P>
+            <P>Then there's what's happening on the owner side. Today's owners have been conditioned by consumer technology to expect transparency, real-time reporting, and proactive communication. They're comparing you to their wealth advisor, not to the last PM who ghosted them. That gap between what owners expect and what most VRMs deliver is widening, and I don't see it slowing down.</P>
 
-            <P><B>Consolidation is compressing the middle.</B> The big players are getting bigger through acquisition. The scrappy solo operators are getting more efficient through AI tools. The 30-to-150 unit companies that are too big to wing it and too small for enterprise systems are getting squeezed from both directions. The only durable escape is the depth of your relationship with the people you serve.</P>
+            <P>And consolidation is squeezing from both directions. The big players are getting bigger through acquisition. The scrappy solo operators are getting more efficient through AI tools. The 30-to-150 unit companies in the middle are too big to wing it, but too small for enterprise systems. The only durable path forward I can see is the depth of your relationship with the people you serve.</P>
 
             <H2 id="practice">What the Mulrooney Play looks like in practice</H2>
 
             <P>I'll speak from my own experience because I don't want this to sound prescriptive. What works for a 200-property company in Colorado may not map perfectly to your market. But the principles transfer.</P>
 
-            <P>At Renjoy, we made a deliberate decision to stop thinking of ourselves as a property management company. We are becoming a hospitality company — an operating model change.</P>
+            <P>At Renjoy, we made a deliberate decision to stop thinking of ourselves as a property management company. We are becoming an AI-first hospitality company. Let me be more specific about what "AI-first" actually means. It doesn't mean replacing your team with software. It means designing every workflow with the assumption that a system handles the predictable work and a human handles the judgment calls. It's a complete operating model change.</P>
 
-            <P>The first thing that changed was what we measure. Our north star isn't units under management or revenue per property. It's whether an owner would ever choose to leave. That sounds soft until you make it operational. It means tracking owner communication cadence, response times, proactive outreach frequency, NPS scores, and churn leading indicators. It means building an entire Owner Relations function whose explicit purpose is: no owner chooses to leave.</P>
+            <P>The first thing that changed was what we measure. For a while I thought the right north star was revenue per property because that's what the spreadsheet rewards. But we kept losing owners who were profitable on paper and it forced us to ask a different question: would this owner ever choose to leave? It sounds soft until you make it operational. It means tracking owner communication cadence, response times, proactive outreach frequency, NPS scores, etc. Not "is this owner making money?"</P>
 
-            <P>The second thing that changed was how we think about our team. In the extraction model, your field team is labor. In the hospitality model, they're the product. Our housekeepers aren't just people who clean. They're the first impression of our brand, every single stay.</P>
+            <P>The second thing that changed was how we think about our team. In the extraction model, your field team is labor. In the hospitality model, they're the product. Our housekeepers aren't just people who clean. They're the first impression of our brand, every single stay. We invest in training, quality standards, and retention because a housekeeper who takes pride in their work delivers a fundamentally different experience than one who's just checking boxes. Requiring ongoing hospitality training for all our field team members is key.</P>
 
-            <P>The third thing was technology. We adopted an AI-first approach, but not to replace people — to free them. We automate the repetitive and give our team access to information to proactively surprise our guests. Our AI models notice communications with guests, such as a birthday, and automatically generate a task for our team to grab a birthday card, balloons, or whatever else the AI gathers from the conversation to personalize the surprise.</P>
+            <P>The third thing was technology. We adopted an AI-first approach, but not to replace people. To free them. This is the part that gets misunderstood in the broader AI conversation: AI replaces tasks, not jobs. The scheduling, the data entry, the repetitive communication are tasks. AI can even notice that a guest mentioned their anniversary and making sure there's a bottle of wine waiting. But actually adding the final touch of a handwritten note and delivering the hospitality, that's a job.</P>
+
+            <P>We automate the first category so our team can invest in the second. We give them access to information to proactively surprise our guests. Our AI models notice communications with guests, such as a birthday, and automatically generate a task for our team who's going to turn the unit to grab a birthday card, balloons, or whatever else the AI gathers from the conversation to personalize the surprise.</P>
 
             <P>This is the Mulrooney Play. We're not building a mining operation. We're building the Fairview Hotel.</P>
-
-            <H2 id="flywheel">The flywheel underneath</H2>
-
-            <P>The hospitality model isn't just nicer. It's structurally better economics.</P>
-
-            <P>When you deliver a genuinely excellent guest experience, you get better reviews. Better reviews earn better placement on booking platforms. Better placement drives more bookings at higher rates. Higher rates mean better returns for owners. Better returns mean owners stay. Owners who stay refer other owners. And a growing portfolio of high-fit owners lets you invest more in your team, your technology, and your properties — which produces even better guest experiences.</P>
-
-            <PQ tweet="Hospitality is the input. Everything else is the output.">Hospitality is the input. Everything else is the output.</PQ>
-
-            <P>The extraction model doesn't have a flywheel. It has a treadmill. You acquire properties, service them, lose some, replace them. There's no compounding because there's no deepening. Every new property is the same lift as the last one.</P>
 
             <H2 id="hardest">The hardest part</H2>
 
             <P>I'll be honest: the hardest part of making this shift isn't operational. It's cultural. Changing the identity of an organization takes thought, persistence, and risk.</P>
 
-            <P>If you've built a successful property management company, you have a deeply ingrained sense of what your business is. You manage properties. That's the category. Letting go of that identity, even when the market is telling you it's the right move, feels like letting go of the thing that got you here.</P>
+            <P>If you've built a successful property management company, you have a deeply ingrained sense of what your business is. You manage properties. That's the category and it's how you describe yourself at conferences, on your website, in your pitch to new owners. Letting go of that identity, even when the market is telling you it's the right move, feels like letting go of the thing that got you here.</P>
 
-            <P>This is exactly what happened to John Sutter. He wasn't a bad businessman. He was a successful one who couldn't let go of the identity that made him successful. He defined himself as an agricultural magnate. When the world changed around him, he kept building the farm.</P>
+            <P>This is exactly what happened to John Sutter, the man who owned the land where gold was discovered. He wasn't a bad businessman. He was a successful one who couldn't let go of the identity that made him successful. He defined himself as an agricultural magnate. When the world changed around him, he kept building the farm.</P>
 
             <P>The operators who are going to thrive over the next decade aren't the ones with the most properties, the best technology, or the lowest fees. They're the ones willing to answer a harder question: <em>What business am I actually in?</em></P>
 
@@ -361,16 +356,18 @@ export default function MulrooneyPlay() {
 
             <H2 id="fairview">The Fairview is still standing</H2>
 
-            <P>The Klondike gold rush lasted roughly three years. By 1899, the easy placer gold was gone. Most miners left Dawson with less money than they arrived with. But the infrastructure Mulrooney built didn't leave with them. The hotel, the telephone, the town she helped create — those persisted. They became the foundation of something lasting.</P>
+            <P>The Klondike gold rush lasted roughly three years. By 1899, the easy placer gold was gone. Most miners left Dawson with less money than they arrived with. But the infrastructure Mulrooney built didn't leave with them. The hotel, the telephone, the town she helped create, those persisted. They became the foundation of something lasting.</P>
+
+            <P>Mulrooney's play was deceptively simple. She looked at a market defined by extraction and built a business defined by service. She treated grubby gold miners like high end hotel guests. She gave people what they actually wanted instead of what the market assumed they needed.</P>
 
             <P>The best VRM companies of the next decade are going to make the same play. They'll stop managing properties and start serving hospitality. They'll stop competing on the listing, the calendar, the nightly rate, and start competing on the experience.</P>
 
-            <P><B>They won't look like VRM companies at all. They'll look like hospitality companies that happen to manage vacation rentals.</B></P>
+            <P>They won't look like VRM companies at all. They'll look like hospitality companies that happen to manage vacation rentals.</P>
 
             <P>That's the Mulrooney Play. And the barrier to making it has never been lower.</P>
 
             <div style={{marginTop:"64px",padding:"24px 0",borderTop:"1px solid rgba(212,137,122,0.1)",fontFamily:"'Figtree',sans-serif",fontSize:"16px",fontStyle:"italic",color:"#6b6760"}}>
-              This is the second essay in a series on what the gold rushes teach us about building companies in the age of AI. The first essay, "Stake Your Claim," explored the broader parallels between gold rush economics and the AI frontier.
+              This is the second essay in a series on what the gold rushes teach us about building companies in the age of AI. The first essay, <a href="/essays/stake-your-claim" style={{color:"#d4897a",textDecoration:"none",borderBottom:"1px solid rgba(212,137,122,0.3)"}}>Stake Your Claim</a>, explored the broader parallels between gold rush economics and the AI frontier. This one zooms in on the archetype that matters most for independent VRM operators.
             </div>
           </div>
         </article>
