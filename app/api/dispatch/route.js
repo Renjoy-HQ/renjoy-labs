@@ -51,7 +51,7 @@ export async function POST(request) {
     if (!contactsRes.ok) {
       const err = await contactsRes.text();
       console.error("GHL contacts fetch error:", err);
-      return NextResponse.json({ error: "Failed to fetch subscribers" }, { status: 502 });
+      return NextResponse.json({ error: "Failed to fetch subscribers", status: contactsRes.status, detail: err }, { status: 502 });
     }
 
     const contactsData = await contactsRes.json();
