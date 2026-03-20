@@ -30,11 +30,10 @@ export async function POST(request) {
 
     const apiKey = process.env.GHL_API_KEY;
     const locationId = process.env.GHL_LOCATION_ID;
-    const fromEmail = process.env.GHL_FROM_EMAIL;
-    const fromName = process.env.GHL_FROM_NAME || "Jacob Mueller";
+    const resendKey = process.env.RESEND_API_KEY;
 
-    if (!apiKey || !locationId || !fromEmail) {
-      return NextResponse.json({ error: "GHL env vars not configured" }, { status: 500 });
+    if (!apiKey || !locationId || !resendKey) {
+      return NextResponse.json({ error: "Missing env vars" }, { status: 500 });
     }
 
     // Search contacts with tag "mining-report"
@@ -71,10 +70,10 @@ export async function POST(request) {
     const subject = `New from The Mining Report: ${content_title}`;
     const html = buildEmailHTML(body);
 
-    // Send to each contact
+    // Send to each contact via Resend
     const results = await Promise.allSettled(
       contacts.map(contact =>
-        sendEmail({ contact, subject, html, fromEmail, fromName, apiKey })
+        sendEmail({ contact, subject, html, resendKey })
       )
     );
 
@@ -89,22 +88,18 @@ export async function POST(request) {
   }
 }
 
-async function sendEmail({ contact, subject, html, fromEmail, fromName, apiKey }) {
-  const res = await fetch("https://services.leadconnectorhq.com/conversations/messages", {
+async function sendEmail({ contact, subject, html, resendKey }) {
+  const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${resendKey}`,
       "Content-Type": "application/json",
-      Version: "2021-07-28",
     },
     body: JSON.stringify({
-      type: "Email",
-      contactId: contact.id,
+      from: "Jacob Mueller <jacob@labs.renjoy.com>",
+      to: [contact.email],
       subject,
       html,
-      emailFrom: fromEmail,
-      emailFromName: fromName,
-      emailTo: contact.email,
     }),
   });
 
