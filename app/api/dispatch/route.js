@@ -68,12 +68,11 @@ export async function POST(request) {
     }
 
     const subject = `New from The Mining Report: ${content_title}`;
-    const html = buildEmailHTML(body);
 
     // Send to each contact via Resend
     const results = await Promise.allSettled(
       contacts.map(contact =>
-        sendEmail({ contact, subject, html, resendKey })
+        sendEmail({ contact, subject, body, resendKey })
       )
     );
 
@@ -88,7 +87,8 @@ export async function POST(request) {
   }
 }
 
-async function sendEmail({ contact, subject, html, resendKey }) {
+async function sendEmail({ contact, subject, body, resendKey }) {
+  const html = buildEmailHTML(body, contact.email);
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -100,6 +100,10 @@ async function sendEmail({ contact, subject, html, resendKey }) {
       to: [contact.email],
       subject,
       html,
+      headers: {
+        "List-Unsubscribe": `<mailto:unsubscribe@labs.renjoy.com?subject=Unsubscribe&body=${encodeURIComponent(contact.email)}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
     }),
   });
 
@@ -118,7 +122,7 @@ function esc(str) {
   return String(str ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function buildEmailHTML(b) {
+function buildEmailHTML(b, recipientEmail = "") {
   const isEssay = b.content_type === "essay";
   const preheader = esc(b.content_preheader);
   const category = esc(b.content_category);
@@ -240,7 +244,7 @@ function buildEmailHTML(b) {
                   <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:11px;font-weight:400;color:#6b6760;margin:0 0 6px 0;line-height:1.5;letter-spacing:0.3px;">Colorado Springs &middot; Buena Vista &middot; Woodland Park</p>
                   <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:11px;font-weight:300;font-style:italic;color:#4a4640;margin:0 0 14px 0;">No spam. We respect your inbox like we respect the claim.</p>
                   <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:11px;font-weight:400;color:#4a4640;margin:0;">
-                    <a href="{{unsubscribe_link}}" style="color:#6b6760;text-decoration:underline;">Unsubscribe</a>
+                    <a href="mailto:unsubscribe@labs.renjoy.com?subject=Unsubscribe&body=${encodeURIComponent(recipientEmail)}" style="color:#6b6760;text-decoration:underline;">Unsubscribe</a>
                     &nbsp;&middot;&nbsp;
                     <a href="https://labs.renjoy.com" style="color:#6b6760;text-decoration:underline;">Renjoy Labs</a>
                     &nbsp;&middot;&nbsp;
