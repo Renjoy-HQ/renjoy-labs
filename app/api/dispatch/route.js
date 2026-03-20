@@ -56,9 +56,7 @@ export async function POST(request) {
 
     const contactsData = await contactsRes.json();
     const allContacts = contactsData.contacts || [];
-    if (allContacts.length > 0) {
-      return NextResponse.json({ debug_first_contact: allContacts[0] });
-    }
+    return NextResponse.json({ debug_all: allContacts.map(c => ({ email: c.email, tags: c.tags, id: c.id })) });
     const contacts = allContacts.filter(c => Array.isArray(c.tags) && c.tags.includes("mining-report"));
 
     if (contacts.length === 0) {
