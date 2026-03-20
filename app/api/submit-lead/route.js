@@ -73,7 +73,7 @@ export async function POST(request) {
     if (type === "newsletter") {
       const resendKey = process.env.RESEND_API_KEY;
       if (resendKey) {
-        await fetch("https://api.resend.com/emails", {
+        const welcomeRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${resendKey}`,
@@ -92,6 +92,12 @@ export async function POST(request) {
             },
           }),
         });
+        if (!welcomeRes.ok) {
+          const welcomeErr = await welcomeRes.text();
+          console.error("Welcome email error:", welcomeRes.status, welcomeErr);
+        }
+      } else {
+        console.error("Welcome email skipped: RESEND_API_KEY not set");
       }
     }
 
