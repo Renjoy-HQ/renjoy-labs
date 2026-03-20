@@ -50,7 +50,7 @@ export async function POST(request) {
         body: JSON.stringify({
           locationId,
           pageLimit: 100,
-          filters: [{ field: "tags", operator: "contains_set", value: ["mining-report"] }],
+          filters: [{ field: "tags", operator: "contains", value: "mining-report" }],
         }),
       }
     );
