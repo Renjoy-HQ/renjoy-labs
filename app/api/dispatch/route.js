@@ -37,9 +37,9 @@ export async function POST(request) {
       return NextResponse.json({ error: "GHL env vars not configured" }, { status: 500 });
     }
 
-    // Fetch all contacts tagged "mining-report"
+    // Fetch all contacts and filter by tag client-side
     const contactsRes = await fetch(
-      `https://services.leadconnectorhq.com/contacts/?locationId=${locationId}&tags=mining-report&limit=100`,
+      `https://services.leadconnectorhq.com/contacts/?locationId=${locationId}&limit=100`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -55,7 +55,8 @@ export async function POST(request) {
     }
 
     const contactsData = await contactsRes.json();
-    const contacts = contactsData.contacts || [];
+    const allContacts = contactsData.contacts || [];
+    const contacts = allContacts.filter(c => Array.isArray(c.tags) && c.tags.includes("mining-report"));
 
     if (contacts.length === 0) {
       return NextResponse.json({ error: "No subscribers found with tag 'mining-report'" }, { status: 404 });
