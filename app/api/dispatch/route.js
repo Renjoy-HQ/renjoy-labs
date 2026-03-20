@@ -37,52 +37,59 @@ export async function POST(request) {
       return NextResponse.json({ error: "GHL env vars not configured" }, { status: 500 });
     }
 
-    // Fetch contact directly by ID for testing
-    const testContactRes = await fetch(
-      `https://services.leadconnectorhq.com/contacts/l0fAH3V1yZWStrMlBSUn`,
+    // Search contacts with tag "mining-report"
+    const searchRes = await fetch(
+      `https://services.leadconnectorhq.com/contacts/search`,
       {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
           Version: "2021-07-28",
         },
+        body: JSON.stringify({
+          locationId,
+          pageLimit: 100,
+          filters: [{ field: "tags", operator: "contains_set", value: ["mining-report"] }],
+        }),
       }
     );
 
-    if (!testContactRes.ok) {
-      const err = await testContactRes.text();
-      return NextResponse.json({ error: "Failed to fetch test contact", detail: err }, { status: 502 });
+    if (!searchRes.ok) {
+      const err = await searchRes.text();
+      console.error("GHL search error:", err);
+      return NextResponse.json({ error: "Failed to fetch subscribers", detail: err }, { status: 502 });
     }
 
-    const testContactData = await testContactRes.json();
-    const contacts = [testContactData.contact].filter(Boolean);
-    const contacts = allContacts.filter(c => Array.isArray(c.tags) && c.tags.includes("mining-report"));
+    const searchData = await searchRes.json();
+    const contacts = (searchData.contacts || []).filter(c => c.email);
 
     if (contacts.length === 0) {
       return NextResponse.json({ error: "No subscribers found with tag 'mining-report'" }, { status: 404 });
     }
 
-    const subject = `New from The Mining Report: ${content_type === "essay" ? "📄" : "🔧"} ${content_title}`;
+    const subject = `New from The Mining Report: ${content_title}`;
     const html = buildEmailHTML(body);
 
     // Send to each contact
     const results = await Promise.allSettled(
       contacts.map(contact =>
-        sendEmail({ contact, subject, html, body, fromEmail, fromName, apiKey })
+        sendEmail({ contact, subject, html, fromEmail, fromName, apiKey })
       )
     );
 
     const sent = results.filter(r => r.status === "fulfilled").length;
     const failed = results.filter(r => r.status === "rejected").length;
-    const debug = results.map(r => r.status === "fulfilled" ? r.value : r.reason?.message);
+    const errors = results.filter(r => r.status === "rejected").map(r => r.reason?.message);
 
-    return NextResponse.json({ success: true, sent, failed, total: contacts.length, debug });
+    return NextResponse.json({ success: true, sent, failed, total: contacts.length, errors });
   } catch (err) {
     console.error("dispatch error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
 
-async function sendEmail({ contact, subject, html, body, fromEmail, fromName, apiKey }) {
+async function sendEmail({ contact, subject, html, fromEmail, fromName, apiKey }) {
   const res = await fetch("https://services.leadconnectorhq.com/conversations/messages", {
     method: "POST",
     headers: {
@@ -189,27 +196,22 @@ function buildEmailHTML(b) {
         <!-- Body -->
         <tr>
           <td>
-
             <!-- Card -->
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #3a2a30;border-radius:12px;overflow:hidden;margin:0 0 28px 0;">
               <tr>
                 <td style="padding:28px 28px 24px 28px;">
-
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0;">
                     <tr>
                       <td><span style="font-family:'JetBrains Mono',Consolas,monospace;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#d4897a;">${category}</span></td>
                       <td align="right"><span style="font-family:'JetBrains Mono',Consolas,monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#6b6760;border:1px solid #3a2a30;border-radius:20px;padding:4px 12px;display:inline-block;line-height:1;">&#x25CF;&nbsp;<span style="color:#4ade80;">PUBLISHED</span></span></td>
                     </tr>
                   </table>
-
                   <h1 style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;line-height:1.3;color:#e8e4df;margin:0 0 8px 0;">${title}</h1>
                   <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:#9a958e;font-style:italic;margin:0 0 16px 0;">${subtitle}</p>
                   <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:14px;font-weight:400;line-height:1.8;color:#b5b0a8;margin:0 0 20px 0;">${summary}</p>
-
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr><td style="border-top:1px solid #d4897a;padding-top:12px;">${cardFooter}</td></tr>
                   </table>
-
                 </td>
               </tr>
             </table>
@@ -227,7 +229,6 @@ function buildEmailHTML(b) {
 
             <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:15px;font-weight:600;line-height:1.6;color:#e8e4df;margin:0 0 4px 0;">&mdash; Jacob Mueller</p>
             <p style="font-family:Figtree,Arial,Helvetica,sans-serif;font-size:13px;font-weight:300;line-height:1.5;color:#6b6760;margin:0;">CEO, Renjoy</p>
-
           </td>
         </tr>
 
