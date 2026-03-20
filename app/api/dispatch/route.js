@@ -56,6 +56,10 @@ export async function POST(request) {
 
     const contactsData = await contactsRes.json();
     const allContacts = contactsData.contacts || [];
+    // Debug: return first contact's tags to inspect format
+    if (allContacts.length > 0) {
+      return NextResponse.json({ debug_tags: allContacts[0].tags, debug_contact: allContacts[0].email });
+    }
     const contacts = allContacts.filter(c => Array.isArray(c.tags) && c.tags.includes("mining-report"));
 
     if (contacts.length === 0) {
