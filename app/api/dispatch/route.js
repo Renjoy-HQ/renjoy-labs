@@ -97,9 +97,11 @@ async function sendEmail({ contact, subject, body, resendKey }) {
     },
     body: JSON.stringify({
       from: "Jacob Mueller <jacob@labs.renjoy.com>",
+      reply_to: "jacob@renjoy.com",
       to: [contact.email],
       subject,
       html,
+      text: buildPlainText(body),
       headers: {
         "List-Unsubscribe": `<mailto:unsubscribe@labs.renjoy.com?subject=Unsubscribe&body=${encodeURIComponent(contact.email)}>`,
         "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
@@ -116,6 +118,31 @@ async function sendEmail({ contact, subject, body, resendKey }) {
   } catch {
     return { raw: responseText };
   }
+}
+
+function buildPlainText(b) {
+  const isEssay = b.content_type === "essay";
+  let text = `THE MINING REPORT\n${"─".repeat(40)}\n\n`;
+  text += `${b.content_category?.toUpperCase() || ""} · PUBLISHED\n\n`;
+  text += `${b.content_title}\n`;
+  if (b.content_subtitle) text += `${b.content_subtitle}\n`;
+  text += `\n${b.content_summary}\n\n`;
+  text += `${"─".repeat(40)}\n\n`;
+  if (isEssay) {
+    text += `"${b.pull_quote}"\n\n`;
+    text += `${b.content_connector}\n\n`;
+    text += `${b.read_time} min read\n\n`;
+  } else {
+    text += `What it does:\n${b.content_how}\n\n`;
+    text += `What changed:\n${b.content_result}\n\n`;
+    text += `Stack: ${b.tech_stack}\n\n`;
+  }
+  text += `Read the full piece: ${b.content_url}\n\n`;
+  text += `${"─".repeat(40)}\n`;
+  text += `— Jacob Mueller, CEO Renjoy\n\n`;
+  text += `To unsubscribe, reply with "unsubscribe" in the subject line.\n`;
+  text += `Renjoy Labs · labs.renjoy.com\n`;
+  return text;
 }
 
 function esc(str) {
