@@ -37,32 +37,24 @@ export async function POST(request) {
       return NextResponse.json({ error: "GHL env vars not configured" }, { status: 500 });
     }
 
-    // Search contacts by tag using POST search API
-    const contactsRes = await fetch(
-      `https://services.leadconnectorhq.com/contacts/search`,
+    // Fetch contact directly by ID for testing
+    const testContactRes = await fetch(
+      `https://services.leadconnectorhq.com/contacts/l0fAH3V1yZWStrMlBSUn`,
       {
-        method: "POST",
         headers: {
           Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
           Version: "2021-07-28",
         },
-        body: JSON.stringify({
-          locationId,
-          pageLimit: 100,
-          filters: [{ field: "tags", operator: "contains_any", value: ["mining-report"] }],
-        }),
       }
     );
 
-    if (!contactsRes.ok) {
-      const err = await contactsRes.text();
-      console.error("GHL contacts search error:", err);
-      return NextResponse.json({ error: "Failed to fetch subscribers", status: contactsRes.status, detail: err }, { status: 502 });
+    if (!testContactRes.ok) {
+      const err = await testContactRes.text();
+      return NextResponse.json({ error: "Failed to fetch test contact", detail: err }, { status: 502 });
     }
 
-    const contactsData = await contactsRes.json();
-    return NextResponse.json({ debug_search: contactsData });
+    const testContactData = await testContactRes.json();
+    const contacts = [testContactData.contact].filter(Boolean);
     const contacts = allContacts.filter(c => Array.isArray(c.tags) && c.tags.includes("mining-report"));
 
     if (contacts.length === 0) {
