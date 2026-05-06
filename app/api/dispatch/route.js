@@ -67,14 +67,17 @@ export async function POST(request) {
       return NextResponse.json({ error: "No subscribers found with tag 'mining-report'" }, { status: 404 });
     }
 
-    const subject = `New from The Mining Report: ${content_title}`;
+    const subject = `New Renjoy Labs Mining Report: ${content_title}`;
 
-    // Send to each contact via Resend
-    const results = await Promise.allSettled(
-      contacts.map(contact =>
-        sendEmail({ contact, subject, body, resendKey })
-      )
-    );
+    // Send sequentially with a small delay to avoid Resend's 5 req/sec rate limit
+    const results = [];
+    for (const contact of contacts) {
+      results.push(await sendEmail({ contact, subject, body, resendKey }).then(
+        val => ({ status: "fulfilled", value: val }),
+        err => ({ status: "rejected", reason: err })
+      ));
+      await new Promise(r => setTimeout(r, 250));
+    }
 
     const sent = results.filter(r => r.status === "fulfilled").length;
     const failed = results.filter(r => r.status === "rejected").length;
