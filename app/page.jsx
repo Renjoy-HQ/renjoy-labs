@@ -95,6 +95,16 @@ const FEATURED_ARTICLE = {
 
 const ARTICLES = [
   {
+    tag: "AI Transformation",
+    title: "Rebuilding the Plane While Flying It",
+    excerpt:
+      "We are running two architectures simultaneously. The legacy stack is still flying. And we're tearing it apart mid-flight.",
+    readTime: "8 min",
+    status: "Published",
+    subtitle: "Why the most painful phase of our AI transformation is proof we're doing the right thing",
+    link: "/essays/rebuilding-the-plane",
+  },
+  {
     tag: "Practical AI",
     title: "How VRM Operators Are Actually Using AI Right Now",
     excerpt:
