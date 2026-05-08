@@ -156,7 +156,9 @@ const ARTICLES = [
     excerpt:
       "Most VRM operators think they sell property management. They actually sell peace of mind, time back, and asset protection. The ones who understand this retain owners at 2x the rate.",
     readTime: "9 min",
-    status: "Coming Soon",
+    status: "Published",
+    subtitle: "What you're actually selling",
+    link: "/essays/the-15-pan",
   },
   {
     tag: "Scaling",
